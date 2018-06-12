@@ -23,7 +23,7 @@
                 <h1 class="header">Rate a Burger</h1>
                 <div class="login-page">
                 <?php
-                    if(isset($_POST['submit'])){
+                    if(isset($_POST['login'])){
                              $username = $_POST['username']; $password = $_POST['password'];
                         if($username === 'admin' && $password === 'password'){
                          $_SESSION['logedIn'] = true; header('LOCATION:admin.php'); die();
@@ -38,7 +38,7 @@
                      <form class="login-form" action="" method="post">
                         <input type="text"  id="username" name="username" placeholder="Username"/>
                         <input type="password" id="pwd" name="password" placeholder="Password"/>
-                        <button type="submit" name="submit">login</button>
+                        <button type="submit" name="login">login</button>
                       </form>
                     </div>
                   </div>
