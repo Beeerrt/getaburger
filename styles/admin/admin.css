@@ -1,0 +1,76 @@
+button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+  }
+
+body
+{
+    background-color: #C0C0C0 !important; 
+   
+    /* height: 100%;
+    width: 100%;
+    padding:0;
+    margin:0;
+    background: url(../../assets/burger_background.jpg) no-repeat center center fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover; */
+}
+.logo
+{
+    width: 30px;
+    height: 30px;;
+}
+
+.row
+{
+    margin-right:0 !important;
+}
+.col
+{
+    padding-right:0 !important;
+}
+
+.delete-btn
+{
+    color:red;
+    margin-left: 10px;
+}
+.change-btn
+{
+    
+    color: blue;
+}
+
+.container
+{
+    background: rgba(255,255,255,0.7);
+    padding:0!important;
+}
+/* 
+.table-head
+{
+    background: black;
+} */
+
+tbody{
+    max-height:200px;
+    overflow-y:auto;
+    width: 100%;
+    }
+
+.btn-add
+{
+    margin-top:20px;
+}
