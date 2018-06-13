@@ -17,10 +17,21 @@
     </head>
     <body>
     <?php
-                    if(isset($_POST['submit'])){
-                        session_destroy();
-                        header('LOCATION:index.php'); 
-                        die();
+                    if(isset($_POST['safe'])){
+                        $dataarray = array('restaurant','bewerter','burger','rating','service');
+                        //check if all values are selected
+                        foreach($dataarray as $parameter)
+                        {
+                            echo $_POST[$parameter];
+                        }
+
+
+                        
+                        // header('LOCATION:index.php'); 
+                        // $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', 'root', '');
+                        // $statement = $pdo->prepare("INSERT INTO rating (restaurant,bewerter,burger,rating,service) VALUES (?, ?, ?,?,?)");
+                        // $statement->execute(array($_POST['restaurant'], $_POST['bewerter'], $_POST['burger'],$_POST['burgerrating'],$_POST['servicerating']));   
+
                      }
                      if(isset($_POST['back']))
                      {
@@ -42,13 +53,81 @@
     <br>
 
     <div class="container">
+        <form action="" method="post">
         <div class="row">
             <div class="col">
                 <h1>Add Burger Rating</h1>
             </div>
         </div>
-                <form action="" method="post">
-                    <button type="submit" name="back" class="btn btn-success btn-back">Back</button>
+        <div class="row">
+            <div class="col-sm">
+            <div class="form-group">
+                <label for="restaurant">Restaurant</label>
+                <input type="text" class="form-control" name="restaurant" id="restaurant" placeholder="Restaurant" >
+            </div>
+            </div>
+            <div class="col-sm">
+            <div class="form-group">
+                <!-- <label for="bewerter">Bewerter</label>
+                <input type="text" class="form-control" id="bewerter" placeholder="Bewerter"> -->
+                <label  for="bewerter">Bewerter</label>
+                <select class="custom-select " name="bewerter" id="bewerter" >
+                    <option selected>Choose...</option>
+                    <option value="Elliot">Elliot</option>
+                    <option value="Kai">Kai</option>
+                    <option value="Björn">Björn</option>
+                </select>
+
+            </div>
+            </div>
+            <div class="col-sm">
+            <div class="form-group">
+                <label for="burger">Burger</label>
+                <input type="text" class="form-control" name="burger" id="burger" placeholder="Burger" >
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+            <div class="form-group">
+                <label for="burgerrating">Rating Burger</label>
+                <select class="custom-select" name="burgerrating" id="burgerrating" >
+                    <option selected>Choose...</option>
+                    <option value="0.5">0.5</option>
+                    <option value="1.0">1.0</option>
+                    <option value="1.5">1.5</option>
+                    <option value="2.0">2.0</option>
+                    <option value="2.5">2.5</option>
+                    <option value="3.0">3.0</option>
+                    <option value="3.5">3.5</option>
+                    <option value="4.0">4.0</option>
+                    <option value="4.5">4.5</option>
+                    <option value="5.0">5.0</option>
+                </select>
+            </div>
+            </div>
+            <div class="col-sm">
+            <div class="form-group">
+                <label for="servicerating">Rating Service</label>
+                <select class="custom-select" name="servicerating" id="servicerating" >
+                    <option selected >Choose...</option>
+                    <option value="0.5">0.5</option>
+                    <option value="1.0">1.0</option>
+                    <option value="1.5">1.5</option>
+                    <option value="2.0">2.0</option>
+                    <option value="2.5">2.5</option>
+                    <option value="3.0">3.0</option>
+                    <option value="3.5">3.5</option>
+                    <option value="4.0">4.0</option>
+                    <option value="4.5">4.5</option>
+                    <option value="5.0">5.0</option>
+                </select>
+            </div>
+
+            </div>
+        </div>
+                    <button type="submit" name="safe" class="btn btn-success btn-safe">Safe</button>
+                    <button type="submit" name="back" class="btn btn-danger btn-back">Back</button>
                 </form>
     </div>
 </body>

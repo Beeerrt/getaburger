@@ -34,29 +34,30 @@
 
 
         <form class="form-inline my-2 my-lg-0" action="" method="post">
-            <button type="submit" name="submit" class="btn btn-danger">Logout</button>
+            <button type="submit" name="submit" class="btn btn-danger btn-logout">Logout</button>
         </form>
 
 </nav>
     <br>
 <div class="container">
+<div class="table-wrapper-2">
 <div class="table-responsive">
-    <table class="table thead-light table-hover">
+    <table class="table thead-light  table-hover">
   <thead class="bg-secondary">
     <tr class="table-head">
       <th scope="col">Restaurant</th>
       <th scope="col">Bewerter</th>
       <th scope="col">Burger</th>
-      <th scope="col">Burger</th>
-      <th scope="col">Service</th>
-      <th scope="col">Action</th>
+      <th scope="col" class="rating">Burger</th>
+      <th scope="col" class="rating">Service</th>
+      <th scope="col" align=\"center\">Action</th>
     </tr>
   </thead>
   <tbody>
 
 <?php
     // SQL Connection
-    $pdo = new PDO('mysql:host=localhost;dbname=burger', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', 'root', '');
 
     $sql = "SELECT * FROM rating";
 
@@ -66,10 +67,148 @@
             $tblRow = "<tr><th scope=\"row\">".$row['restaurant']."</td>";
             $tblRow .= "<td>".$row['bewerter']."</td>";
             $tblRow .= "<td>".$row['burger']."</td>";
-            $tblRow .= "<td>".$row['rating']."</td>";
-            $tblRow .= "<td>".$row['service']."</td>";
-            $tblRow .= "<td><a href=\"#\"><i class=\"fas fa-cog change-btn\"></i></a>";
-            $tblRow .=" <a href=\"#\"><i class=\"fas fa-trash-alt delete-btn\"></i></a></td></tr>";
+
+            $burgerrating;
+            //Function for Starrating
+            if($row['rating'] == 0.5)
+            {
+                $burgerrating = "<span class=\"fas fa-star-half\"></span>";
+
+            }
+            if($row['rating'] == 1)
+            {
+                $burgerrating = "<span class=\"fas fa-star\"></span>";
+            }
+            if($row['rating'] == 1.5)
+            {
+                $burgerrating = "<span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star-half\"></span>";
+            }
+            if($row['rating'] == 2)
+            {
+                $burgerrating = "<span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>";
+            }
+            if($row['rating'] == 2.5)
+            {
+                $burgerrating = "<span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star-half\"></span>";
+            }
+            if($row['rating'] == 3)
+            {
+                $burgerrating = "<span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>";
+            }
+            if($row['rating'] == 3.5)
+            {
+                $burgerrating = "<span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star-half\"></span>";
+            }
+            if($row['rating'] == 4)
+            {
+                $burgerrating = "<span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>";
+            }
+            if($row['rating'] == 4.5)
+            {
+                $burgerrating = "<span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star-half\"></span>";
+            }
+            if($row['rating'] == 5)
+            {
+                $burgerrating = "<span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>";
+            }
+            
+
+
+
+            $servicerating;
+            //Function for Starrating
+            if($row['service'] == 0.5)
+            {
+                $servicerating = "<span class=\"fas fa-star-half\"></span>";
+
+            }
+            if($row['service'] == 1)
+            {
+                $servicerating = "<span class=\"fas fa-star\"></span>";
+            }
+            if($row['service'] == 1.5)
+            {
+                $servicerating = "<span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star-half\"></span>";
+            }
+            if($row['service'] == 2)
+            {
+                $servicerating = "<span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>";
+            }
+            if($row['service'] == 2.5)
+            {
+                $servicerating = "<span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star-half\"></span>";
+            }
+            if($row['service'] == 3)
+            {
+                $servicerating = "<span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>";
+            }
+            if($row['service'] == 3.5)
+            {
+                $servicerating = "<span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star-half\"></span>";
+            }
+            if($row['service'] == 4)
+            {
+                $servicerating = "<span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>";
+            }
+            if($row['service'] == 4.5)
+            {
+                $servicerating = "<span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star-half\"></span>";
+            }
+            if($row['service'] == 5)
+            {
+                $servicerating = "<span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>
+                <span class=\"fas fa-star\"></span>";
+            }
+
+
+            $tblRow .= "<td class=\"rating\">".$burgerrating."</td>";
+            $tblRow .= "<td class=\"rating\">".$servicerating."</td>";
+
+
+            // $tblRow .= "<td>".$row['rating']."</td>";
+            // $tblRow .= "<td>".$row['service']."</td>";
+            // $tblRow .= "<td><a href=\"#\"><i class=\"fas fa-cog change-btn\"></i></a>";
+            $tblRow .= "<td align=\"center\"><button class=\"btn btn-primary btn-sm change-btn\"><i class=\"fas fa-cog \"></i></button>";
+            $tblRow .=" <button class=\"btn btn-danger btn-sm delete-btn\"><i class=\"fas fa-trash-alt \"></i></button></td></tr>";
             
             echo $tblRow;
         }
@@ -79,6 +218,7 @@
   </tbody>
 </table>
 </div>
+    </div>
 <form action="" method="post">
 <button type="submit" name="add" class="btn btn-success btn-add">Add</button>
 </form>
