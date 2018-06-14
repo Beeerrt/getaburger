@@ -24,14 +24,12 @@
                         {
                             echo $_POST[$parameter];
                         }
-
-
                         
-                        // header('LOCATION:index.php'); 
-                        // $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', 'root', '');
-                        // $statement = $pdo->prepare("INSERT INTO rating (restaurant,bewerter,burger,rating,service) VALUES (?, ?, ?,?,?)");
-                        // $statement->execute(array($_POST['restaurant'], $_POST['bewerter'], $_POST['burger'],$_POST['burgerrating'],$_POST['servicerating']));   
-
+                        
+                        $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', 'root', '');
+                        $statement = $pdo->prepare("INSERT INTO rating (restaurant,bewerter,burger,rating,service) VALUES (?, ?, ?,?,?)");
+                        $statement->execute(array($_POST['restaurant'], $_POST['bewerter'], $_POST['burger'],$_POST['burgerrating'],$_POST['servicerating']));   
+                        header('LOCATION:admin.php'); 
                      }
                      if(isset($_POST['back']))
                      {
@@ -46,7 +44,7 @@
 
 
         <form class="form-inline my-2 my-lg-0" action="" method="post">
-            <button type="submit" name="submit" class="btn btn-danger">Logout</button>
+            <button type="submit" name="submit" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </form>
 
     </nav>
@@ -68,16 +66,8 @@
             </div>
             <div class="col-sm">
             <div class="form-group">
-                <!-- <label for="bewerter">Bewerter</label>
-                <input type="text" class="form-control" id="bewerter" placeholder="Bewerter"> -->
                 <label  for="bewerter">Bewerter</label>
-                <select class="custom-select " name="bewerter" id="bewerter" >
-                    <option selected>Choose...</option>
-                    <option value="Elliot">Elliot</option>
-                    <option value="Kai">Kai</option>
-                    <option value="Björn">Björn</option>
-                </select>
-
+                <input type="text" class="form-control" name="bewerter" id="bewerter" value="<?php echo $_SESSION['username'];?>" readonly>
             </div>
             </div>
             <div class="col-sm">
@@ -126,9 +116,16 @@
 
             </div>
         </div>
+        <div class="row">
+        <div class="col">
+            <label for="beschreibung">Anmerkung</label>
+            <textarea class="form-control" id="beschreibung" rows="3"></textarea>
+        </div>
+        </div>
                     <button type="submit" name="safe" class="btn btn-success btn-safe">Safe</button>
                     <button type="submit" name="back" class="btn btn-danger btn-back">Back</button>
                 </form>
     </div>
+
 </body>
 </html>

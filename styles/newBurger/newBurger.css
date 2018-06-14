@@ -8,6 +8,7 @@ body
 {
     background: rgba(255,255,255,0.7);
     /* padding:0!important; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .logo
 {
@@ -30,3 +31,22 @@ body
     width: 100%;
     margin-top:20px!important;
   }
+.btn-back
+{
+    margin-bottom: 20px!important;
+}
+
+h1
+{
+    margin-bottom: 40px!important;
+}
+.btn{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+input,
+select,
+textarea
+{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

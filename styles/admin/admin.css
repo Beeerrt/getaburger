@@ -58,12 +58,14 @@ body
 .delete-btn
 {
     width: 70px;
+    height: 24px;
     /* color:red; */
     /* margin-top: 10px; */
 }
 .change-btn
 {
     width: 70px;
+    /* height: 14px; */
     /* color: blue; */
 }
 
@@ -71,6 +73,7 @@ body
 {
     background: rgba(255,255,255,0.7);
     padding:0!important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .table-wrapper-2 {
@@ -93,4 +96,14 @@ span
 .rating
 {
     width: 150px;
+}
+
+
+.btn-group
+{
+    width: 100%!important;
+}
+.alert
+{
+    text-align: center;
 }

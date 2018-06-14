@@ -23,21 +23,40 @@
                 <h1 class="header">Rate a Burger</h1>
                 <div class="login-page">
                 <?php
+                      
+
                     if(isset($_POST['login'])){
                              $username = $_POST['username']; $password = $_POST['password'];
-                        if($username === 'admin' && $password === 'password'){
-                         $_SESSION['logedIn'] = true; header('LOCATION:admin.php'); die();
+                        echo $username;
+                        echo $password;
+                         
+                        $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', 'root', '');
+                        $sql = "SELECT * FROM users Where username='".$username."' and password='".$password."';";
+                        $res =  $pdo->query($sql);
+
+                        if ($res->fetchColumn() > 0) {
+                            $_SESSION['username'] = $username;
+                            $_SESSION['logedIn'] = true; header('LOCATION:admin.php'); die();
+
                         }
-                        {
-                         echo "<div class='alert alert-danger'>Username and Password do not match.</div>";
+                      else {
+                          echo "<div class='alert alert-danger'>Username and Password do not match.</div>";
                         }
+
+
+                        // if($username === 'admin' && $password === 'password'){
+                        //  $_SESSION['logedIn'] = true; header('LOCATION:admin.php'); die();
+                        // }
+                        // {
+                        //  echo "<div class='alert alert-danger'>Username and Password do not match.</div>";
+                        // }
 
                      }
                 ?>
                     <div class="form">
                      <form class="login-form" action="" method="post">
-                        <input type="text"  id="username" name="username" placeholder="Username"/>
-                        <input type="password" id="pwd" name="password" placeholder="Password"/>
+                        <input type="text"  id="username" name="username" placeholder="Username"/ autocomplete="off">
+                        <input type="password" id="pwd" name="password" placeholder="Password"/ autocomplete="off">
                         <button type="submit" name="login">login</button>
                       </form>
                     </div>
