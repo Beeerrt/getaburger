@@ -27,13 +27,14 @@
                 <div class="login-page">
                 <?php
                       
-
+                      $configs = include('config.php');
+           
                     if(isset($_POST['login'])){
                              $username = $_POST['username']; $password = $_POST['password'];
                         echo $username;
                         echo $password;
                          
-                        $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', 'root', '');
+                        $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', $configs['username'], $configs['password']);
                         $sql = "SELECT * FROM users Where username='".$username."' and password='".$password."';";
                         $res =  $pdo->query($sql);
 

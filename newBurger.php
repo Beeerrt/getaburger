@@ -17,6 +17,7 @@
     </head>
     <body>
     <?php
+            $configs = include('config.php');
                     if(isset($_POST['safe'])){
                         $dataarray = array('restaurant','bewerter','burger','rating','service','anmerkung');
                         //check if all values are selected
@@ -26,7 +27,7 @@
                         }
                         
                         
-                        $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', 'root', '');
+                        $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', $configs['username'], $configs['password']);
                         $statement = $pdo->prepare("INSERT INTO rating (restaurant,bewerter,burger,rating,service,anmerkung) VALUES (?, ?, ?,?,?,?)");
                         $statement->execute(array($_POST['restaurant'], $_POST['bewerter'], $_POST['burger'],$_POST['burgerrating'],$_POST['servicerating'],$_POST['anmerkung']));   
                         header('LOCATION:admin.php'); 
