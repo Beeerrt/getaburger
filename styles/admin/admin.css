@@ -1,32 +1,18 @@
-button {
-    /* font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    outline: 0; */
+.btn-add,
+.btn-delete-execute,
+.btn-delete-close,
+.btn-map {
     background: #4CAF50;
     width: 100%;
-    /* border: 0;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    -webkit-transition: all 0.3 ease;
-    transition: all 0.3 ease;
-    cursor: pointer; */
     margin-top :20px!important;
-  }
-
+     }
+.btn-map
+{
+    color:white!important;
+}
 body
 {
     background-color: #C0C0C0 !important; 
-   
-    /* height: 100%;
-    width: 100%;
-    padding:0;
-    margin:0;
-    background: url(../../assets/burger_background.jpg) no-repeat center center fixed;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover; */
 }
 .logo
 {
@@ -46,7 +32,6 @@ body
 @media only screen and (max-width: 600px) {
     .delete-btn {
         width: 50px;
-        /* color:red; */
          margin-top: 10px;
         }
     }
@@ -59,14 +44,10 @@ body
 {
     width: 70px;
     height: 24px;
-    /* color:red; */
-    /* margin-top: 10px; */
 }
 .change-btn
 {
     width: 70px;
-    /* height: 14px; */
-    /* color: blue; */
 }
 
 .container

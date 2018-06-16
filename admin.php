@@ -17,6 +17,8 @@
      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha256-HAaDW5o2+LelybUhfuk0Zh2Vdk8Y2W2UeKmbaXhalfA=" crossorigin="anonymous" />
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js" integrity="sha256-jGAkJO3hvqIDc4nIY1sfh/FPbV+UK+1N+xJJg6zzr7A=" crossorigin="anonymous"></script>
     </head>
     <body>
    
@@ -58,9 +60,18 @@ if(isset($_POST['executedelete']))
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = "DELETE FROM rating Where id=".$_POST['executedelete'];
     $pdo->exec($sql);
-    echo "<div class=\"alert alert-success\" role=\"alert\">
-            Rating deleted <i class=\"fas fa-check\"></i>
-            </div>";
+    // echo "<div class=\"alert alert-success alert-dismissible\" role=\"alert\"  id='success-alert'>
+    //         Rating deleted <i class=\"fas fa-check\"></i>
+    //         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+    //         <span aria-hidden='true'>&times;</span>
+    //         </button>
+    //         </div>";
+
+
+    echo "<div class=\"alert alert-success alert-dismissible fade show\">
+    <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+    Rating deleted <i class=\"fas fa-check\"></i>
+  </div>";
    }
    catch(PDOException $e)
    {
@@ -73,9 +84,10 @@ if(isset($_POST['executedelete']))
     </div>
     <br>
 <div class="container">
+<input class="form-control" id="myInput" type="text" placeholder="Search..">
 <div class="table-wrapper-2">
 <div class="table-responsive">
-    <table class="table thead-light  table-hover">
+    <table id='table' class="table thead-light  table-hover">
   <thead class="bg-secondary">
     <tr class="table-head">
       <th scope="col">Restaurant</th>
@@ -89,194 +101,93 @@ if(isset($_POST['executedelete']))
   <tbody>
 
 <?php
-    // SQL Connection
-    $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', 'root', '');
 
-    $sql = "SELECT * FROM rating";
+    include ("{$_SERVER['DOCUMENT_ROOT']}/rateaburger/table.php");
+    // // SQL Connection
+    // $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', 'root', '');
 
-        foreach ($pdo->query($sql) as $row) {
-        
-            //create row
-            $tblRow = "<tr><th scope=\"row\">".$row['restaurant']."</td>";
-            $tblRow .= "<td>".$row['bewerter']."</td>";
-            $tblRow .= "<td>".$row['burger']."</td>";
+    // $sql = "SELECT * FROM rating";
 
-            $burgerrating;
-            //Function for Starrating
-            if($row['rating'] == 0.5)
-            {
-                $burgerrating = "<span class=\"fas fa-star-half\"></span>";
-
-            }
-            if($row['rating'] == 1)
-            {
-                $burgerrating = "<span class=\"fas fa-star\"></span>";
-            }
-            if($row['rating'] == 1.5)
-            {
-                $burgerrating = "<span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star-half\"></span>";
-            }
-            if($row['rating'] == 2)
-            {
-                $burgerrating = "<span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>";
-            }
-            if($row['rating'] == 2.5)
-            {
-                $burgerrating = "<span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star-half\"></span>";
-            }
-            if($row['rating'] == 3)
-            {
-                $burgerrating = "<span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>";
-            }
-            if($row['rating'] == 3.5)
-            {
-                $burgerrating = "<span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star-half\"></span>";
-            }
-            if($row['rating'] == 4)
-            {
-                $burgerrating = "<span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>";
-            }
-            if($row['rating'] == 4.5)
-            {
-                $burgerrating = "<span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star-half\"></span>";
-            }
-            if($row['rating'] == 5)
-            {
-                $burgerrating = "<span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>";
-            }
+    //     foreach ($pdo->query($sql) as $row) {
             
+    //         //create row
+    //         $tblRow = "<tr><th scope=\"row\">".$row['restaurant']."</td>";
+    //         $tblRow .= "<td>".$row['bewerter']."</td>";
+    //         $tblRow .= "<td>".$row['burger']."</td>";
+
+    //         //Seperate Rating 
+    //         $partsBurger = explode('.',$row['rating']);
+    //         $partsService = explode('.', $row['service']);
+
+    //         //init Variable for TR
+    //         $burgerrating = "";
+    //         $servicerating = "";
 
 
+    //         //Generate TR for Burgerrating
+    //         for ($i = 1; $i <=  $partsBurger[0]; $i++) {
+    //            $burgerrating .= "<span class=\"fas fa-star\"></span>";
+    //         }
 
-            $servicerating;
-            //Function for Starrating
-            if($row['service'] == 0.5)
-            {
-                $servicerating = "<span class=\"fas fa-star-half\"></span>";
+    //         if(!empty($partsBurger[1]))    
+    //         {
+    //             $burgerrating .= "<span class=\"fas fa-star-half\"></span>";
+    //         }
 
-            }
-            if($row['service'] == 1)
-            {
-                $servicerating = "<span class=\"fas fa-star\"></span>";
-            }
-            if($row['service'] == 1.5)
-            {
-                $servicerating = "<span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star-half\"></span>";
-            }
-            if($row['service'] == 2)
-            {
-                $servicerating = "<span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>";
-            }
-            if($row['service'] == 2.5)
-            {
-                $servicerating = "<span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star-half\"></span>";
-            }
-            if($row['service'] == 3)
-            {
-                $servicerating = "<span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>";
-            }
-            if($row['service'] == 3.5)
-            {
-                $servicerating = "<span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star-half\"></span>";
-            }
-            if($row['service'] == 4)
-            {
-                $servicerating = "<span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>";
-            }
-            if($row['service'] == 4.5)
-            {
-                $servicerating = "<span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star-half\"></span>";
-            }
-            if($row['service'] == 5)
-            {
-                $servicerating = "<span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>
-                <span class=\"fas fa-star\"></span>";
-            }
+    //         //Generate TR for Servicerating
+    //         for ($i = 1; $i <=  $partsService[0]; $i++) {
+    //             $servicerating .= "<span class=\"fas fa-star\"></span>";
+    //          }
+ 
+    //          if(!empty($partsService[1]))    
+    //          {
+    //              $servicerating .= "<span class=\"fas fa-star-half\"></span>";
+    //          }
+           
+           
+    //         $tblRow .= "<td class=\"rating\">".$burgerrating."</td>";
+    //         $tblRow .= "<td class=\"rating\">".$servicerating."</td>";
 
-
-            $tblRow .= "<td class=\"rating\">".$burgerrating."</td>";
-            $tblRow .= "<td class=\"rating\">".$servicerating."</td>";
-
-
-            // $tblRow .= "<td>".$row['rating']."</td>";
-            // $tblRow .= "<td>".$row['service']."</td>";
-            // $tblRow .= "<td><a href=\"#\"><i class=\"fas fa-cog change-btn\"></i></a>";
-            $tblRow .= "<td align=\"center\"><div class=\"btn-group\"><form class=\"form\">
-                        <button name=\"alter\" value=\"".$row['id']."\" class=\"btn btn-primary btn-sm change-btn\"><i class=\"fas fa-cog \"></i></button>
-                        </form>";
+    //         // $tblRow .= "<td>".$row['rating']."</td>";
+    //         // $tblRow .= "<td>".$row['service']."</td>";
+    //         // $tblRow .= "<td><a href=\"#\"><i class=\"fas fa-cog change-btn\"></i></a>";
+    //         $tblRow .= "<td align=\"center\"><div class=\"btn-group\"><form class=\"form\">
+    //                     <button name=\"alter\" value=\"".$row['id']."\" class=\"btn btn-primary btn-sm change-btn\"><i class=\"fas fa-cog \"></i></button>
+    //                     </form>";
            
               
 
 
-            $tblRow .=" <button name=\"delete\" value=\"".$row['id']."\" class=\"btn btn-danger btn-sm delete-btn\" data-toggle=\"modal\" data-target=\"#ModalCenter".$row['id']."\"><i class=\"fas fa-trash-alt \"   >
-                        </i></button></div>";
+    //         $tblRow .=" <button name=\"delete\" value=\"".$row['id']."\" class=\"btn btn-danger btn-sm delete-btn\" data-toggle=\"modal\" data-target=\"#ModalCenter".$row['id']."\"><i class=\"fas fa-trash-alt \"   >
+    //                     </i></button></div>";
             
-            //add Modal window for every Entry in Table
-            $modal = "<div class=\"modal fade\" id=\"ModalCenter".$row['id']."\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"ModalCenterTitle\" aria-hidden=\"true\">
-            <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">
-            <div class=\"modal-content\">
-                <div class=\"modal-header\">
-                <h5 class=\"modal-title\" id=\"ModalCenterTitle\">Delete Entry ?!?</h5>
+    //         //add Modal window for every Entry in Table
+    //         $modal = "<div class=\"modal fade\" id=\"ModalCenter".$row['id']."\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"ModalCenterTitle\" aria-hidden=\"true\">
+    //         <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">
+    //         <div class=\"modal-content\">
+    //             <div class=\"modal-header\">
+    //             <h5 class=\"modal-title\" id=\"ModalCenterTitle\">Delete Entry ?!?</h5>
         
-                </div>
-                <div class=\"modal-body\">
-                Willst du Pfeife diesen Eintrag wirklich löschen?😨
-                </div>
-                <div class=\"modal-footer\">
-                <form action=\"\" method=\"post\" class=\"btn-group\">
-                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>
+    //             </div>
+    //             <div class=\"modal-body\">
+    //             Willst du Pfeife diesen Eintrag wirklich löschen?😨
+    //             </div>
+    //             <div class=\"modal-footer\">
+    //             <form action=\"\" method=\"post\" class=\"btn-group\">
+    //             <button type=\"button\" class=\"btn btn-secondary btn-delete-close\" data-dismiss=\"modal\">Close</button>
                 
-                <button type=\"submit\" value=\"".$row['id']."\" name=\"executedelete\" class=\"btn btn-Danger\">Delete</button>
-                </form>
-                    </div>
-                </div>
-            </div>
-        </div></td></tr>";
+    //             <button type=\"submit\" value=\"".$row['id']."\" name=\"executedelete\" class=\"btn btn-Danger btn-delete-execute\" id='delete'>Delete</button>
+    //             </form>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     </div></td></tr>";
             
-            $tblRow .= $modal;
+    //         $tblRow .= $modal;
 
 
-            echo $tblRow;
-        }
+    //         echo $tblRow;
+        // }
 ?>
 
 
@@ -284,17 +195,35 @@ if(isset($_POST['executedelete']))
 </table>
 </div>
     </div>
-<!-- Modal -->
-
 
 <form action="" method="post">
-<button type="submit" name="add" class="btn btn-success btn-add">Add</button>
+<div class="btn-group" role="group" aria-label="Basic example">
+
+<button type="submit" name="add" class="btn btn-success btn-add"><i class="fas fa-plus"></i> Add</button>
+<a href="assets/Burgermap.jpg"   data-toggle="lightbox" name="image" class="btn btn-dark btn-map" ><i class="fas fa-map"></i> Map</a>
+</div>
 </form>
 </div>
 
 
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#table tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
 
 
+<script>
+$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            });
+</script>
         
     </body> 
 </html>

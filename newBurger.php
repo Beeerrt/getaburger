@@ -18,7 +18,7 @@
     <body>
     <?php
                     if(isset($_POST['safe'])){
-                        $dataarray = array('restaurant','bewerter','burger','rating','service');
+                        $dataarray = array('restaurant','bewerter','burger','rating','service','anmerkung');
                         //check if all values are selected
                         foreach($dataarray as $parameter)
                         {
@@ -27,8 +27,8 @@
                         
                         
                         $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', 'root', '');
-                        $statement = $pdo->prepare("INSERT INTO rating (restaurant,bewerter,burger,rating,service) VALUES (?, ?, ?,?,?)");
-                        $statement->execute(array($_POST['restaurant'], $_POST['bewerter'], $_POST['burger'],$_POST['burgerrating'],$_POST['servicerating']));   
+                        $statement = $pdo->prepare("INSERT INTO rating (restaurant,bewerter,burger,rating,service,anmerkung) VALUES (?, ?, ?,?,?,?)");
+                        $statement->execute(array($_POST['restaurant'], $_POST['bewerter'], $_POST['burger'],$_POST['burgerrating'],$_POST['servicerating'],$_POST['anmerkung']));   
                         header('LOCATION:admin.php'); 
                      }
                      if(isset($_POST['back']))
@@ -118,12 +118,13 @@
         </div>
         <div class="row">
         <div class="col">
-            <label for="beschreibung">Anmerkung</label>
-            <textarea class="form-control" id="beschreibung" rows="3"></textarea>
+            <label for="anmerkung">Anmerkung</label>
+            <textarea class="form-control" name="anmerkung" id="anmerkung" rows="3"></textarea>
         </div>
         </div>
-                    <button type="submit" name="safe" class="btn btn-success btn-safe">Safe</button>
-                    <button type="submit" name="back" class="btn btn-danger btn-back">Back</button>
+        
+                    <button type="submit" name="safe" class="btn btn-success btn-safe"><i class="fas fa-save"></i> Safe</button>
+                    <button type="submit" name="back" class="btn btn-danger btn-back"><i class="fas fa-caret-left"></i> Back</button>
                 </form>
     </div>
 

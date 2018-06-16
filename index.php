@@ -15,12 +15,15 @@
      <link rel="shortcut icon" type="image/x-icon" href="assets/logo.ico">
      <link rel="stylesheet" type="text/css" href="styles/main.css">
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
    </head>
 <body>
 <section class="intro">
         <div class="inner">
             <div class="content">
+                <div class="header_reveal">
                 <h1 class="header">Rate a Burger</h1>
+                </div>
                 <div class="login-page">
                 <?php
                       
@@ -64,5 +67,12 @@
             </div>
         </div>
     </section>
+
+    <script>
+        // JavaScript
+        window.sr = ScrollReveal();
+        sr.reveal('.form',{ duration: 1000 });
+        sr.reveal('header_reveal',{ duration:1000}) ;
+    </script>
 </body>
 </html>
