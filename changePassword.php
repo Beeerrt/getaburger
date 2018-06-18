@@ -8,12 +8,16 @@
 <html>
     <head>
     <meta http-equiv='content-type' content='text/html;charset=utf-8' />
-     <title>Dashboard</title>
+     <title>Change Password</title>
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!-- <link rel="stylesheet" type="text/css" href="styles/newBurger/newBurger.css"> -->
      <link rel="stylesheet" type="text/css" href="styles/changePassword/changePassword.css">
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+     
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     </head>
     <body>
@@ -50,23 +54,35 @@
                         //check if password is equal 
                         if($_POST['password1'] == $_POST['password2'])
                         {
-                            echo strlen($_POST['password1']);
+
                             //check 8 charackter
                             if(strlen($_POST['password1']) > '7')
                             {
                                 //safe password
-                                      
+                                $configs = include('config.php');
+                                $pdo = new PDO('mysql:host='.$configs['host'].';dbname='.$configs['db'].';charset=utf8', $configs['username'], $configs['password']);
+                                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "Update  users set password='".$_POST['password1']."' Where username='".$_SESSION['username']."'";
+                                $pdo->exec($sql);
+                           
+                           
+                                    echo "<div class=\"alert alert-success alert-dismissible fade show\">
+                                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+                                    Password changed successfully <i class=\"fas fa-exclamation-triangle\"></i>
+                                    </div>";
+
                             }
                             else
                             {
                                 echo "<div class=\"alert alert-danger alert-dismissible fade show\">
                                     <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
-                                    Passwords must atleast 8 Characters long<i class=\"fas fa-exclamation-triangle\"></i>
+                                    Passwords must atleast 8 Characters long <i class=\"fas fa-exclamation-triangle\"></i>
                                     </div>";
                             }
                         }
                         else
                         {
+                            
                             echo "<div class=\"alert alert-danger alert-dismissible fade show\">
                                     <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
                                     Passwords must be identical <i class=\"fas fa-exclamation-triangle\"></i>
