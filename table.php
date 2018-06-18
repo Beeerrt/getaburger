@@ -2,7 +2,7 @@
     //Include Config File
     $configs = include('config.php');
     // SQL Connection
-    $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', $configs['username'], $configs['password']);
+    $pdo = new PDO('mysql:host='.$configs['host'].';dbname='.$configs['db'].';charset=utf8', $configs['username'], $configs['password']);
 
     $sql = "SELECT * FROM rating";
 

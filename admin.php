@@ -25,7 +25,7 @@
 
 
         <?php
-                    if(isset($_POST['submit'])){
+                    if(isset($_POST['logout'])){
                         session_destroy();
                         header('LOCATION:index.php'); 
                         die();
@@ -33,6 +33,11 @@
                      if(isset($_POST['add']))
                      {
                          header('LOCATION:newBurger.php');
+                         die();
+                     }
+                     if(isset($_POST['change_password']))
+                     {
+                         header('LOCATION:changePassword.php');
                          die();
                      }
                    
@@ -44,7 +49,8 @@
 
 
         <form class="form-inline my-2 my-lg-0" action="" method="post">
-            <button type="submit" name="submit" class="btn btn-danger btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            <button type="submit" name="change_password" class="btn btn-dark btn-change-password"><i class="fas fa-lock"></i></button>
+            <button type="submit" name="logout" class="btn btn-danger btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </form>
 
 </nav>
@@ -56,16 +62,12 @@ if(isset($_POST['executedelete']))
 {
    
    try{
-    $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', 'root', '');
+    $configs = include('config.php');
+    $pdo = new PDO('mysql:host='.$configs['host'].';dbname='.$configs['db'].';charset=utf8', $configs['username'], $configs['password']);
+
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = "DELETE FROM rating Where id=".$_POST['executedelete'];
     $pdo->exec($sql);
-    // echo "<div class=\"alert alert-success alert-dismissible\" role=\"alert\"  id='success-alert'>
-    //         Rating deleted <i class=\"fas fa-check\"></i>
-    //         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    //         <span aria-hidden='true'>&times;</span>
-    //         </button>
-    //         </div>";
 
 
     echo "<div class=\"alert alert-success alert-dismissible fade show\">

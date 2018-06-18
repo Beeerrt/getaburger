@@ -31,10 +31,10 @@
            
                     if(isset($_POST['login'])){
                              $username = $_POST['username']; $password = $_POST['password'];
-                        echo $username;
-                        echo $password;
+
                          
-                        $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', $configs['username'], $configs['password']);
+                        // $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', $configs['username'], $configs['password']);
+                        $pdo = new PDO('mysql:host='.$configs['host'].';dbname='.$configs['db'].';charset=utf8', $configs['username'], $configs['password']);
                         $sql = "SELECT * FROM users Where username='".$username."' and password='".$password."';";
                         $res =  $pdo->query($sql);
 

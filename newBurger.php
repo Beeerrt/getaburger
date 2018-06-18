@@ -17,6 +17,12 @@
     </head>
     <body>
     <?php
+            if(isset($_POST['logout'])){
+                session_destroy();
+                header('LOCATION:index.php'); 
+                die();
+            }
+
             $configs = include('config.php');
                     if(isset($_POST['safe'])){
                         $dataarray = array('restaurant','bewerter','burger','rating','service','anmerkung');
@@ -27,7 +33,8 @@
                         }
                         
                         
-                        $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', $configs['username'], $configs['password']);
+                        // $pdo = new PDO('mysql:host=localhost;dbname=burger;charset=utf8', $configs['username'], $configs['password']);
+                        $pdo = new PDO('mysql:host='.$configs['host'].';dbname='.$configs['db'].';charset=utf8', $configs['username'], $configs['password']);
                         $statement = $pdo->prepare("INSERT INTO rating (restaurant,bewerter,burger,rating,service,anmerkung) VALUES (?, ?, ?,?,?,?)");
                         $statement->execute(array($_POST['restaurant'], $_POST['bewerter'], $_POST['burger'],$_POST['burgerrating'],$_POST['servicerating'],$_POST['anmerkung']));   
                         header('LOCATION:admin.php'); 
@@ -45,7 +52,7 @@
 
 
         <form class="form-inline my-2 my-lg-0" action="" method="post">
-            <button type="submit" name="submit" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            <button type="submit" name="logout" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </form>
 
     </nav>
